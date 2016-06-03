@@ -12,13 +12,10 @@
 			width: 50%;
 		}
 		.controls {
-			width: 25%;
+			margin-top: 30px;
+			text-align: center;
 		}
-		.play {
-			background: url('https://image.freepik.com/free-icon/play-button_318-42541.jpg');
-			background-size: 100% 100%;
-			background: ;
-		}
+
 	</style>
 </head>
 	<body>
@@ -26,23 +23,53 @@
 			<img class="taylor" src="http://www.8bitphotos.com/ebpheliohost/static/8BPimage201663112411216365.png"></img>
 		<h1>8bitSwift</h1>
 		<main>
-			<form action="">
-				<label for="audiosrc">Audio Source</label>
-				<input type="text" name="audiosrc">
-​
-				<button type="submit>">Convert!</button>
-			</form>
-​
 			<div class="controls">
-				<button class="play" onclick="toggleLiveInput()">Play</button>
+				<button class="play" onclick="toggleLiveInput()">Record</button>
+			</div>
+			
+			<button type="submit" id="convert">Convert!</button>​
+			
+			<div id="detector">
 			</div>
 		</main>
+
+		<div id="detector" class="vague" style="display: none">
+					<div class="pitch"><span id="pitch">--</span>Hz</div>
+					<div class="note"><span id="note">--</span></div>   
+					<canvas id="output" width=300 height=42></canvas>
+					<div id="detune"><span id="detune_amt">--</span><span id="flat">cents &#9837;</span><span id="sharp">cents &#9839;</span></div>
+				</div>
 ​
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+		 </script>
+		 <script>
+		 	var masterNoteArray = [];
+		 	var musicJson = {
+		 		timeSignature: [4, 4],
+		 		tempo: 120,
+		 		instruments: {
+		 		    rightHand: {
+		 		        name: 'square',
+		 		        pack: 'oscillators'
+		 		    },
+		 		    leftHand: {
+		 		        name: 'square',
+		 		        pack: 'oscillators'
+		 		    },
+		 		},
+		 		notes: {
+		 			rightHand: []
+		 		}
+		 	};
+
+		 	$('#convert').on('click', function () {
+		 		masterNoteArray.forEach(function (note) {
+		 			musicJson.notes.rightHand.push('eighth|' + note + '4');
+		 		});
+		 		console.log(musicJson);
+		 	});
+		 </script>
 		 <script src="/js/pitchdetect.js"></script>
-		<script>
-			var audio = document.createElement('audio');
-		</script>
 	</body>
 </html>

@@ -208,7 +208,6 @@ var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "
 
 function noteFromPitch( frequency ) {
 	var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
-	console.log(noteNum);
 	return Math.round( noteNum ) + 69;
 }
 
@@ -354,7 +353,9 @@ function updatePitch( time ) {
 	 	pitch = ac;
 	 	pitchElem.innerText = Math.round( pitch ) ;
 	 	var note =  noteFromPitch( pitch );
-	 	console.log("asdfdsfasdf", note);
+	 	console.log(noteStrings[note%12]);
+	 	masterNoteArray.push(noteStrings[note%12]);
+
 		noteElem.innerHTML = noteStrings[note%12];
 		var detune = centsOffFromPitch( pitch, note );
 		if (detune == 0 ) {
