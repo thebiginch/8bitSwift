@@ -1,6 +1,6 @@
-var playButton = document.getElementById("playButton");
-var stopButton = document.getElementById("stopButton");
-var pauseButton = document.getElementById("pauseButton");
+var playButton = document.getElementById("playButton_sheet");
+// var stopButton = document.getElementById("stopButton");
+var pauseButton = document.getElementById("pauseButton_sheet");
 
 var music = new BandJS();
 music.setTimeSignature(4,4);
