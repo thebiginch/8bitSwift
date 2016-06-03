@@ -3,6 +3,13 @@
 <head>
 	<title>8 bit Swift</title>
 	<style>
+		@font-face {
+		    font-family: press-start;
+		    src: url('/fonts/PrStart.ttf');
+		}
+		body {
+			font-family: press-start;
+		}
 		.container {
 			width: 75%;
 			margin: 0 auto;
@@ -15,20 +22,23 @@
 			margin-top: 30px;
 			text-align: center;
 		}
-
+		.pressplay {
+			display: none;
+		}
 	</style>
 </head>
 	<body>
 		<div class="container">
-			<img class="taylor" src="http://www.8bitphotos.com/ebpheliohost/static/8BPimage201663112411216365.png"></img>
-		<h1>8bitSwift</h1>
+			<img class="taylor" src="/taylor.png"></img>
+		<h1>8-BIT SWIFT</h1>
 		<main>
 			<div class="controls">
 				<button class="play" onclick="toggleLiveInput()">Record</button>
 			</div>
 			
 			<button type="submit" id="convert">Convert!</button>​
-			
+			<button id="playButton">Play</button>
+			<h3 class="pressplay">Conversion finished, press Play</h3>
 			<div id="detector">
 			</div>
 		</main>
@@ -43,11 +53,15 @@
 		</div>
 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
 		 </script>
+		 <script src="/js/band.min.js"></script>
 		 <script>
 		 	var masterNoteArray = [];
+		 	var playButton = document.getElementById("playButton");
+		 	var music = new BandJS();
+
 		 	var musicJson = {
 		 		timeSignature: [4, 4],
-		 		tempo: 120,
+		 		tempo: 70,
 		 		instruments: {
 		 		    rightHand: {
 		 		        name: 'square',
@@ -65,9 +79,16 @@
 
 		 	$('#convert').on('click', function () {
 		 		masterNoteArray.forEach(function (note) {
-		 			musicJson.notes.rightHand.push('eighth|' + note + '4');
+		 			musicJson.notes.rightHand.push('quarter|' + note + '4');
 		 		});
+		 		$('.pressplay').show();
+		 	});
+
+		 	$('#playButton').on('click', function () {
 		 		console.log(musicJson);
+		 		music.load(musicJson);
+		 		var player = music.finish();
+		 		player.play();
 		 	});
 		 </script>
 		 <script src="/js/pitchdetect.js"></script>
