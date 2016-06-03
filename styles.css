@@ -1,0 +1,22 @@
+@font-face {
+    font-family: press-start;
+    src: url('/fonts/PrStart.ttf');
+}
+body {
+	font-family: press-start;
+}
+.container {
+	width: 75%;
+	margin: 0 auto;
+	text-align: center;
+	}
+.taylor {
+	width: 50%;
+}
+.controls {
+	margin-top: 30px;
+	text-align: center;
+}
+.pressplay {
+	display: none;
+}

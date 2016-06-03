@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>8 bit Swift</title>
+	<link href="/styles.css">
+</head>
+	<body>
+		<div class="container">
+			<img class="taylor" src="/taylor.png"></img>
+		<h1>8-BIT SWIFT</h1>
+		<main>
+			<div class="controls">
+				<button class="play" onclick="toggleLiveInput()">Record</button>
+			</div>
+			
+			<button type="submit" id="convert">Convert!</button>​
+			<button id="playButton_audio">Play from audio</button>
+			<button id="playButton_sheet">Play from sheet music (Geoff's Masterpiece)</button>
+			<button id="pauseButton_sheet">Pause</button>
+			<h3 class="pressplay">Conversion finished, press Play</h3>
+			<div id="detector">
+			</div>
+		</main>
+
+		<div id="detector" class="vague" style="display: none">
+					<div class="pitch"><span id="pitch">--</span>Hz</div>
+					<div class="note"><span id="note">--</span></div>   
+					<canvas id="output" width=300 height=42></canvas>
+					<div id="detune"><span id="detune_amt">--</span><span id="flat">cents &#9837;</span><span id="sharp">cents &#9839;</span></div>
+				</div>
+​
+		</div>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+		 </script>
+		 <script src="/js/band.min.js"></script>
+		 <script>
+		 	var masterNoteArray = [];
+		 	var playButton = document.getElementById("playButton");
+		 	var music = new BandJS();
+
+		 	var musicJson = {
+		 		timeSignature: [4, 4],
+		 		tempo: 100,
+		 		instruments: {
+		 		    rightHand: {
+		 		        name: 'square',
+		 		        pack: 'oscillators'
+		 		    },
+		 		    leftHand: {
+		 		        name: 'square',
+		 		        pack: 'oscillators'
+		 		    },
+		 		},
+		 		notes: {
+		 			rightHand: []
+		 		}
+		 	};
+
+		 	$('#convert').on('click', function () {
+		 		masterNoteArray.forEach(function (note) {
+		 			musicJson.notes.rightHand.push('quarter|' + note + '4');
+		 		});
+		 		$('.pressplay').show();
+		 	});
+
+		 	$('#playButton_audio').on('click', function () {
+		 		console.log(musicJson);
+		 		music.load(musicJson);
+		 		var player = music.finish();
+		 		player.play();
+		 	});
+
+		 	$('#playButton_sheet').on('click', function () {
+		 		var player = music.finish();
+		 		player.play();
+		 	});
+		 </script>
+		 <script src="/js/pitchdetect.js"></script>
+	</body>
+</html>
