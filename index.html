@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>8bit</title>
+  <script src="/js/band.min.js"></script>
+</head>
+<body>
+  <h1>hello</h1>
+  <button id="playButton">play</button>
+  <button id="pauseButton">pause</button>
+  <button id="stopButton">stop</button>
+</body>
+
+<script type="text/javascript"> // band.js https://github.com/meenie/band.js
+// arrangement via http://herbalcell.com/static/sheets/legend-of-zelda/overworld-labels.pdf
+var playButton = document.getElementById("playButton");
+var stopButton = document.getElementById("pauseButton");
+var pauseButton = document.getElementById("pauseButton");
+
+var music = new BandJS();
+music.setTimeSignature(4,4);
+music.setTempo(70);
+
+var rightHand = music.createInstrument('sawtooth');
+var leftHand = music.createInstrument('sawtooth');
+var drums = music.createInstrument('brown','noises');
+
+//measure 1
+leftHand.rest('eighth')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('eighth', 'G5')
+.note('eighth', 'A5')
+.rest('quarter')
+
+//measure 2
+.rest('eighth')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('eighth', 'F5')
+.note('eighth', 'A5')
+.note('eighth', 'E5')
+.note('eighth', 'E5')
+.note('eighth', 'F5')
+
+//measure 3
+.rest('eighth')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('eighth', 'G5')
+.note('eighth', 'A5')
+.rest('quarter')
+
+//measure 4
+.rest('eighth')
+.note('sixteenth', 'F5')
+.note('sixteenth', 'F5')
+.note('eighth', 'F5')
+.note('eighth', 'F5')
+.note('eighth', 'A5')
+.note('eighth', 'E5')
+.note('eighth', 'E5')
+.note('eighth', 'F5')
+
+//measure 5
+.rest('eighth')
+.note('sixteenth', 'C6')
+.note('sixteenth', 'C6')
+.note('eighth', 'C6')
+.note('eighth', 'Bb5')
+.note('eighth', 'A5')
+.note('eighth', 'Bb5')
+.note('eighth', 'A5')
+.note('eighth', 'G5')
+
+//measure 6
+.rest('eighth')
+.note('eighth', 'G5')
+.note('eighth', 'G5')
+.note('eighth', 'G5')
+.note('eighth', 'Bb5')
+.note('eighth', 'A5')
+.note('eighth', 'G5')
+.note('eighth', 'F5')
+
+//measure 7
+.rest('eighth')
+.note('sixteenth', 'C6')
+.note('sixteenth', 'C6')
+.note('eighth', 'C6')
+.note('eighth', 'Bb5')
+.note('eighth', 'A5')
+.note('eighth', 'Bb5')
+.note('eighth', 'A5')
+.note('eighth', 'G5')
+
+//measure 8
+.rest('eighth')
+.note('eighth', 'F5')
+.note('quarter', 'Bb5')
+.note('quarter', 'Bb5')
+.note('eighth', 'Bb5')
+.note('eighth', 'C6')
+
+
+// drums.rest('whole');
+// drums.rest('whole');
+// drums.repeatStart()
+//         .note('eighth', 'A4')
+//         .rest('eighth')
+//         .rest('quarter')
+//         .note('tripletQuarter', 'A4')
+//         .rest('tripletQuarter')
+//         .note('tripletQuarter', 'A4');
+
+
+var player = music.finish();
+
+
+
+
+
+function playZelda() {
+    playButton.disabled = true;
+    pauseButton.disabled = false;
+    stopButton.disabled = false;
+    player.play();
+    playing = true;
+}
+
+function pauseZelda() {
+    if (playing) {
+        player.pause();
+        playing = false;
+    }
+    else {
+        player.play();
+        playing = true;
+    }
+}
+
+function stopZelda() {
+    player.stop();
+    playing = false;
+    enablePlay();
+}
+
+function enablePlay() {
+	console.log('yooo')
+	playButton.disabled = false;
+}
+
+   
+playButton.onclick = playZelda;
+pauseButton.onclick = pauseZelda;
+stopButton.onclick = stopZelda;
+
+
+</script>
+</html>
