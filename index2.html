@@ -3,30 +3,6 @@
 <head>
 	<title>8 bit Swift</title>
 	<link href="/styles.css">
-	<style>
-	@font-face {
-	    font-family: press-start;
-	    src: url('/fonts/PrStart.ttf');
-	}
-	body {
-		font-family: press-start;
-	}
-	.container {
-		width: 75%;
-		margin: 0 auto;
-		text-align: center;
-		}
-	.taylor {
-		width: 50%;
-	}
-	.controls {
-		margin-top: 30px;
-		text-align: center;
-	}
-	.pressplay {
-		display: none;
-	}
-	</style>
 </head>
 	<body>
 		<div class="container">
@@ -39,8 +15,8 @@
 			
 			<button type="submit" id="convert">Convert!</button>​
 			<button id="playButton_audio">Play from audio</button>
-			<button id="playButton">Play from sheet music (Geoff's Masterpiece)</button>
-			<button id="pauseButton">Pause</button>
+			<button id="playButton_sheet">Play from sheet music (Geoff's Masterpiece)</button>
+			<button id="pauseButton_sheet">Pause</button>
 			<button id="stopButton">Stop</button>
 			<h3 class="pressplay">Conversion finished, press Play</h3>
 			<div id="detector">
@@ -58,7 +34,6 @@
 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
 		 </script>
 		 <script src="/js/band.min.js"></script>
-		 <script type="text/javascript" src="/js/blankSpace.js"></script>
 		 <script>
 		 	var masterNoteArray = [];
 		 	var playButton = document.getElementById("playButton");
@@ -96,6 +71,10 @@
 		 		player.play();
 		 	});
 
+		 	$('#playButton_sheet').on('click', function () {
+		 		var player = music.finish();
+		 		player.play();
+		 	});
 		 </script>
 		 <script src="/js/pitchdetect.js"></script>
 	</body>
